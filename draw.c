@@ -21,6 +21,8 @@
 #define MAX(a,b) ((a)>(b)?(a):(b))
 #define LNR2WINDOW(lnr) lnr==-1?0:1
 
+extern void x_resize_window();
+
 typedef struct ICON_C {
 	char name[ARGLEN];
 	Pixmap p;
@@ -990,6 +992,11 @@ parse_non_drawing_commands(char * text) {
 
 	if(!strncmp(text, "^exit()", strlen("^exit()"))) {
 		a_exit(NULL);
+		return 0;
+	}
+
+  if(!strncmp(text, "^screen()", strlen("^screen()"))) {
+		x_resize_window();
 		return 0;
 	}
 

@@ -490,6 +490,24 @@ x_read_resources(void) {
 	}
 }
 
+void
+x_resize_window() {
+  XRectangle si;
+  dzen.title_win.y = dzen.title_win.user_y;
+  dzen.title_win.width = 0;
+
+#ifdef DZEN_XINERAMA
+	queryscreeninfo(dzen.dpy, &si, dzen.xinescreen);
+#else
+	qsi_no_xinerama(dzen.dpy, &si);
+#endif
+	x_check_geometry(si);
+
+  XMoveResizeWindow(dzen.dpy, dzen.title_win.win,
+      dzen.title_win.x, dzen.title_win.y,
+      dzen.title_win.width, dzen.title_win.height);
+}
+
 static void
 x_create_windows(int use_ewmh_dock) {
 	XSetWindowAttributes wa;
@@ -1019,7 +1037,7 @@ main(int argc, char *argv[]) {
 			if(++i < argc) dzen.title_win.x = dzen.slave_win.x = atoi(argv[i]);
 		}
 		else if(!strncmp(argv[i], "-y", 3)) {
-			if(++i < argc) dzen.title_win.y = atoi(argv[i]);
+			if(++i < argc) dzen.title_win.user_y = dzen.title_win.y = atoi(argv[i]);
 		}
 		else if(!strncmp(argv[i], "-w", 3)) {
 			if(++i < argc) dzen.slave_win.width = atoi(argv[i]);

@@ -88,6 +88,7 @@ extern sens_w window_sens[2];
 /* title window */
 struct TW {
 	int x, y, width, height;
+  int user_y;
 
 	char *name;
 	Window win;
