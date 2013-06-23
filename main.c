@@ -505,7 +505,7 @@ x_resize_window() {
 
   XMoveResizeWindow(dzen.dpy, dzen.title_win.win,
       dzen.title_win.x, dzen.title_win.y,
-      dzen.title_win.width, dzen.title_win.height);
+      dzen.title_win.width, dzen.line_height);
 }
 
 static void
