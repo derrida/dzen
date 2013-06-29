@@ -495,6 +495,7 @@ x_resize_window() {
   XRectangle si;
   dzen.title_win.y = dzen.title_win.user_y;
   dzen.title_win.width = 0;
+  dzen.title_win.x = 0;
 
 #ifdef DZEN_XINERAMA
 	queryscreeninfo(dzen.dpy, &si, dzen.xinescreen);
